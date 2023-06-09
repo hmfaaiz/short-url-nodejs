@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short URL Generator</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Wrlcome to Short URL Generator Site</h1>
+    <% if (locals.id) { %>
+        <p>Url is generated:<%= id %>
+        </p>
+
+        <% } %>
+
+            <div>
+                <form method="post" action="/api/url/shorturl">
+                    <label>Paste URL</label>
+                    <input type="text" name="url" placeholder="https://www.google.com/">
+                    <button type="submit">Generate short url</button>
+                </form>
+            </div>
+            <div>
+                <% if (locals.urls) { %>
+
+                    <table>
+                        <thead>
+                            <th>S No.</th>
+                            <th>Short  Url</th>
+                            <th>Url</th>
+                            <th>Total Click</th>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                        <% urls.forEach((url,index)=> { %>
+
+                            <tr>
+                                <td>
+                                    <%= index +1 %>
+                                </td>
+                                <td>
+                                    http://localhost:1000/api/url/find/<%= url.shortID %>
+                                </td>
+                                <td>
+                                    <%= url.url %>
+                                </td>
+                                <td>
+                                    <%= url.urlHistory.length %>
+                                </td>
+                            </tr>
+
+                            <% }) %>
+                    </table>
+
+
+                    <% } %>
+
+            </div>
+
+
+
+</body>
+
+</html>
